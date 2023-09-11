@@ -13,5 +13,5 @@ COPY --from=build /target/finance-0.0.1.jar finance.jar
 
 # ENV PORT=8080
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","demo.jar"]
+ENTRYPOINT ["java","-jar","finance.jar"]
 
