@@ -1,14 +1,14 @@
 package com.we8techi.platform.finance.config;
 
 import com.we8techi.platform.finance.entity.Users;
+import com.we8techi.platform.finance.objects.PrivilegeDTO;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
@@ -21,6 +21,7 @@ public class MyUserDetails implements UserDetails {
     private Long companyId;
     private boolean isEnabled;
     private List<GrantedAuthority> authorities;
+    private Set<PrivilegeDTO> privilegeDTOS;
 
     public MyUserDetails(Users user) {
         this.userName = user.getUserName();
@@ -29,6 +30,10 @@ public class MyUserDetails implements UserDetails {
         this.authorities = getAuthority(user);
         this.isEnabled = user.getActive();
         this.companyId = user.getCompany().getId();
+    }
+
+   public void setPrivilegeDTOS(Set<PrivilegeDTO> privilegeDTOS) {
+        this.privilegeDTOS = privilegeDTOS;
     }
 
     private List<GrantedAuthority> getAuthority(Users user) {
@@ -81,6 +86,7 @@ public class MyUserDetails implements UserDetails {
                 ", email='" + email + '\'' +
                 ", companyId=" + companyId +
                 ", isEnabled=" + isEnabled +
+                ", privilegeDTOS=" + privilegeDTOS +
                 '}';
     }
 }

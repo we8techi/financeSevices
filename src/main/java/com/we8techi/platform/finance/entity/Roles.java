@@ -1,6 +1,7 @@
 package com.we8techi.platform.finance.entity;
 
 import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class Roles extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -26,5 +27,8 @@ public class Roles extends BaseEntity {
 
     @OneToMany(mappedBy = "role")
     private List<UserRoles> userRoles;
+
+    @OneToMany(mappedBy = "role")
+    private List<RolesPrivileges> rolesPrivileges;
 
 }

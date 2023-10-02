@@ -1,5 +1,6 @@
 package com.we8techi.platform.finance.exception.handler;
 
+import com.we8techi.platform.finance.exception.ApplicationException;
 import com.we8techi.platform.finance.objects.APIResponse;
 import com.we8techi.platform.finance.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,11 @@ public class FinanceExceptionController extends ResponseEntityExceptionHandler {
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException ex) {
         return new ResponseEntity<>(new APIResponse(ex.getMessage(), HttpStatus.FORBIDDEN), HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(ApplicationException.class)
+    public ResponseEntity<Object> handleApplicationException(ApplicationException ex) {
+        return new ResponseEntity<>(new APIResponse(ex.getMessage(), ex.getStatus()), ex.getStatus());
     }
 
 }
