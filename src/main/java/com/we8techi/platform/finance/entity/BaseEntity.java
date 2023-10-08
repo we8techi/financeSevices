@@ -1,6 +1,6 @@
 package com.we8techi.platform.finance.entity;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -11,7 +11,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity implements Serializable {
@@ -31,11 +34,11 @@ public abstract class BaseEntity implements Serializable {
     private String createdBy;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated", nullable = false)
+    @Column(name = "updated")
     @LastModifiedDate
     private Date updated;
 
-    @Column(name = "updated_by", nullable = false)
+    @Column(name = "updated_by")
     @LastModifiedBy
     private String updatedBy;
 }
