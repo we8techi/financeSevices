@@ -17,38 +17,37 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "company_details")
+@Table(name = "pigmi_account")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanyDetails implements Serializable {
+public class PigmiAccount implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "company_name")
-    private String companyName;
+    @Column(name = "customer_id", nullable = false)
+    private Long customerId;
 
-    @Column(name = "details")
-    private String details;
+    @Column(name = "interest_rate")
+    private Double interestRate;
 
-    @Column(name = "company_address")
-    private String companyAddress;
+    @Column(name = "amount")
+    private Double amount;
 
-    @Column(name = "is_mobile_access", nullable = false)
-    private Boolean mobileAccess;
+    @Column(name = "payment_details")
+    private String paymentDetails;
 
-    @Column(name = "is_web_access", nullable = false)
-    private Boolean webAccess;
+    @Column(name = "payment_mode")
+    private String paymentMode;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "valid_from", nullable = false)
-    private Date validFrom;
+    @Column(name = "number_of_days")
+    private Integer numberOfDays;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "valid_till", nullable = false)
-    private Date validTill;
+    @Column(name = "pigmi_status")
+    private String pigmiStatus;
 
     @Column(name = "active", updatable = false, nullable = false)
     private Boolean active;
@@ -70,4 +69,5 @@ public class CompanyDetails implements Serializable {
     @Column(name = "updated_by")
     @LastModifiedBy
     private String updatedBy;
+
 }

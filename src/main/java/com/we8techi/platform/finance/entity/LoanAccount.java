@@ -17,38 +17,46 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "company_details")
+@Table(name = "loan_account")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanyDetails implements Serializable {
+public class LoanAccount implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "company_name")
-    private String companyName;
+    @Column(name = "customer_id", nullable = false)
+    private Long customerId;
 
-    @Column(name = "details")
-    private String details;
+    @Column(name = "interest_rate")
+    private Double interestRate;
 
-    @Column(name = "company_address")
-    private String companyAddress;
+    @Column(name = "principal_amount")
+    private Double principalAmount;
 
-    @Column(name = "is_mobile_access", nullable = false)
-    private Boolean mobileAccess;
+    @Column(name = "total_amount")
+    private Double totalAmount;
 
-    @Column(name = "is_web_access", nullable = false)
-    private Boolean webAccess;
+    @Column(name = "collected_amount")
+    private Double collectedAmount;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "valid_from", nullable = false)
-    private Date validFrom;
+    @Column(name = "payment_details")
+    private String paymentDetails;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "valid_till", nullable = false)
-    private Date validTill;
+    @Column(name = "payment_mode")
+    private String paymentMode;
+
+    @Column(name = "number_of_days")
+    private Integer numberOfDays;
+
+    @Column(name = "loan_type")
+    private String loanType;
+
+    @Column(name = "loan_status")
+    private String loanStatus;
 
     @Column(name = "active", updatable = false, nullable = false)
     private Boolean active;
@@ -70,4 +78,5 @@ public class CompanyDetails implements Serializable {
     @Column(name = "updated_by")
     @LastModifiedBy
     private String updatedBy;
+
 }

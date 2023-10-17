@@ -17,38 +17,31 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "company_details")
+@Table(name = "loan_transaction")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanyDetails implements Serializable {
+public class LoanTransactions implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "company_name")
-    private String companyName;
+    @Column(name = "loan_account_id", nullable = false)
+    private Long loanAccountId;
 
-    @Column(name = "details")
-    private String details;
+    @Column(name = "transaction_id")
+    private String transactionId;
 
-    @Column(name = "company_address")
-    private String companyAddress;
+    @Column(name = "amount")
+    private Double amount;
 
-    @Column(name = "is_mobile_access", nullable = false)
-    private Boolean mobileAccess;
+    @Column(name = "payment_details")
+    private String paymentDetails;
 
-    @Column(name = "is_web_access", nullable = false)
-    private Boolean webAccess;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "valid_from", nullable = false)
-    private Date validFrom;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "valid_till", nullable = false)
-    private Date validTill;
+    @Column(name = "payment_mode")
+    private String paymentMode;
 
     @Column(name = "active", updatable = false, nullable = false)
     private Boolean active;

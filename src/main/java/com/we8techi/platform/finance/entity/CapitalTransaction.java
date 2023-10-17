@@ -17,38 +17,40 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "company_details")
+@Table(name = "capital_transaction")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompanyDetails implements Serializable {
+public class CapitalTransaction implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "company_name")
-    private String companyName;
+    @Column(name = "company_id", nullable = false)
+    private Long companyId;
 
-    @Column(name = "details")
-    private String details;
+    @Column(name = "capital_amount")
+    private Double capitalAmount;
 
-    @Column(name = "company_address")
-    private String companyAddress;
+    @Column(name = "credit_amount")
+    private Double creditAmount;
 
-    @Column(name = "is_mobile_access", nullable = false)
-    private Boolean mobileAccess;
+    @Column(name = "debit_amount")
+    private Double debitAmount;
 
-    @Column(name = "is_web_access", nullable = false)
-    private Boolean webAccess;
+    @Column(name = "transaction_id")
+    private String transactionId;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "valid_from", nullable = false)
-    private Date validFrom;
+    @Column(name = "transaction_type")
+    private String transactionType;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "valid_till", nullable = false)
-    private Date validTill;
+    @Column(name = "capital_type")
+    private String capitalType;
+
+    @Column(name = "transaction_details")
+    private String transactionDetails;
 
     @Column(name = "active", updatable = false, nullable = false)
     private Boolean active;
@@ -70,4 +72,5 @@ public class CompanyDetails implements Serializable {
     @Column(name = "updated_by")
     @LastModifiedBy
     private String updatedBy;
+
 }
