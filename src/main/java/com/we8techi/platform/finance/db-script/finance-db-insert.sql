@@ -86,9 +86,7 @@ VALUES(5, 2, 2);
 
 
 -- financedb.customer definition
-
 -- Drop table
-
 -- DROP TABLE financedb.customer;
 
 CREATE TABLE financedb.customer (
@@ -106,44 +104,47 @@ CREATE TABLE financedb.customer (
 	updated_by varchar(255) NOT NULL
 );
 
+-- financedb.loan_account definition
+
 -- Drop table
 
--- DROP TABLE financedb.Loan_account;
+-- DROP TABLE financedb.loan_account;
 
-CREATE TABLE financedb.Loan_account (
+CREATE TABLE financedb.loan_account (
 	id bigserial NOT NULL,
 	customer_id int8 NOT NULL,
-	interest_rate decimal(2,2) NOT NULL,
-	principal_amount decimal(12,2) NOT null, -- Loan disburse amount
-	total_amount decimal(12,2) NOT null, -- Principle + Intrest rate amount 
-	collected_amount decimal(12,2) NOT null, -- Daily collected amount
+	interest_rate numeric(2, 2) NOT NULL,
+	principal_amount numeric(12, 2) NOT NULL,-- Loan disburse amount
+	total_amount numeric(12, 2) NOT NULL, -- Principle + Intrest rate amount
+	collected_amount numeric(12, 2) NOT NULL, -- Daily collected amount
 	payment_details varchar NOT NULL,
-	payment_mode varchar NOT NULL, -- CASH / CHECK / BANK transfer
-    number_of_days number NOT null, -- 100 days maximum
-	loan_type varchar NOT NULL, -- Fixed / variable	
+	payment_mode varchar NOT NULL,  -- CASH / CHECK / BANK transfer
+	number_of_days int4 NOT NULL,  -- 100 days maximum
+	loan_type varchar NOT NULL,  -- Fixed / variable
 	loan_status varchar NOT NULL, -- Rejected /On hold /Inprogress / Disburse / Approved / Closed
-	active bool NOT NULL, 
+	active bool NOT NULL,
 	created timestamp NOT NULL,
 	created_by varchar(255) NOT NULL,
 	updated timestamp NOT NULL,
 	updated_by varchar(255) NOT NULL
 );
 
+-- financedb.pigmi_account definition
 
 -- Drop table
 
--- DROP TABLE financedb.PIGMI_account;
+-- DROP TABLE financedb.pigmi_account;
 
-CREATE TABLE financedb.PIGMI_account (
+CREATE TABLE financedb.pigmi_account (
 	id bigserial NOT NULL,
 	customer_id int8 NOT NULL,
-	interest_rate decimal(2,2) NOT NULL,
-	amount decimal(12,2) NOT null,
+	interest_rate numeric(2, 2) NOT NULL,
+	amount numeric(12, 2) NOT NULL,
 	payment_details varchar NOT NULL,
 	payment_mode varchar NOT NULL, -- CASH / CHECK / BANK transfer
-    number_of_days number NOT null, -- 100 days maximum
-	pigmi_status varchar NOT NULL, -- Rejected /On hold /Inprogress / Disburse / Approved / Closed
-	active bool NOT NULL, 
+    number_of_days int4 NOT null, -- 100 days maximum
+    pigmi_status varchar NOT NULL, -- Rejected /On hold /Inprogress / Disburse / Approved / Closed
+	active bool NOT NULL,
 	created timestamp NOT NULL,
 	created_by varchar(255) NOT NULL,
 	updated timestamp NOT NULL,
@@ -159,20 +160,20 @@ CREATE TABLE financedb.PIGMI_account (
 
 CREATE TABLE financedb.capital_transaction (
 	id bigserial NOT NULL,
-	customer_id int8 NOT NULL,
-	capital_amount decimal(12,2) NOT null,
-	credit_amount decimal(12,2) NOT null,
-	debit_amount decimal(12,2) NOT null,
-	transaction_id varchar,
-	transaction_type varchar NOT NULL, -- LOAN / PIGMI  
-	capital_type varchar NOT NULL, -- bank / in hand
+	company_id int8 NOT NULL,
+	capital_amount numeric(12, 2) NOT NULL,
+	credit_amount numeric(12, 2) NOT NULL,
+	debit_amount numeric(12, 2) NOT NULL,
+	transaction_id varchar NULL,
+	transaction_type varchar NOT NULL,
+	capital_type varchar NOT NULL,
 	transaction_details varchar NOT NULL,
 	active bool NOT NULL,
 	created timestamp NOT NULL,
 	created_by varchar(255) NOT NULL,
 	updated timestamp NOT NULL,
-	updated_by varchar(255) NOT NULL	
-	);
+	updated_by varchar(255) NOT NULL
+);
 
 -- financedb.loan_transaction definition
 
@@ -182,18 +183,17 @@ CREATE TABLE financedb.capital_transaction (
 
 CREATE TABLE financedb.loan_transaction (
 	id bigserial NOT NULL,
-	Loan_account_id int8 NOT NULL,
-	transaction_id varchar,
-	amount decimal(12,2) NOT null,
+	loan_account_id int8 NOT NULL,
+	transaction_id varchar NULL,
+	amount numeric(12, 2) NOT NULL,
 	payment_details varchar NOT NULL,
-	payment_mode varchar NOT NULL, -- CASH / CHECK / BANK transfer
+	payment_mode varchar NOT NULL,  -- CASH / CHECK / BANK transfer
 	active bool NOT NULL,
 	created timestamp NOT NULL,
 	created_by varchar(255) NOT NULL,
 	updated timestamp NOT NULL,
 	updated_by varchar(255) NOT NULL
-)
-
+);
 
 -- financedb.pigmi_transaction definition
 
@@ -204,16 +204,13 @@ CREATE TABLE financedb.loan_transaction (
 CREATE TABLE financedb.pigmi_transaction (
 	id bigserial NOT NULL,
 	pigmi_account_id int8 NOT NULL,
-	transaction_id varchar,
-	amount decimal(12,2) NOT null,
+	transaction_id varchar NULL,
+	amount numeric(12, 2) NOT NULL,
 	payment_details varchar NOT NULL,
-	payment_mode varchar NOT NULL, -- CASH / CHECK / BANK transfer
+	payment_mode varchar NOT NULL,  -- CASH / CHECK / BANK transfer
 	active bool NOT NULL,
 	created timestamp NOT NULL,
 	created_by varchar(255) NOT NULL,
 	updated timestamp NOT NULL,
 	updated_by varchar(255) NOT NULL
-)
-
-
-
+);
