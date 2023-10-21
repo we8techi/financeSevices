@@ -1,6 +1,5 @@
 package com.we8techi.platform.finance.config;
 
-import com.we8techi.platform.finance.exception.handler.FinanceExceptionController;
 import com.we8techi.platform.finance.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -19,7 +19,7 @@ public class FinanceExceptionController extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<Object> handleAdminMasterServiceException(Exception ex) {
         log.error("Exception occurred: " + ex.getMessage());
-        return new ResponseEntity<>(new APIResponse(Constants.SERVER_ERROR, HttpStatus.BAD_REQUEST), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new APIResponse(Constants.SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(AccessDeniedException.class)

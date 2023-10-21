@@ -1,17 +1,15 @@
 package com.we8techi.platform.finance.entity;
 
-import javax.persistence.*;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -23,30 +21,30 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "customer")
-public class Customer implements Serializable {
+@Table(name = "customer_documents")
+public class CustomerDocuments implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "company_id", nullable = false)
-    private Long companyId;
+    @Column(name = "customer_id", nullable = false)
+    private Long customerId;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "document_name")
+    private String documentName;
 
-    @Column(name = "age")
-    private int age;
+    @Column(name = "document_size")
+    private Integer documentSize;
 
-    @Column(name = "pan_details")
-    private String panDetails;
+    @Column(name = "document_type")
+    private String documentType;
 
-    @Column(name = "aadhar_details")
-    private String adharDetails;
-
-    @Column(name = "address_proof")
-    private String addressProof;
+    @Lob
+    @Column(name="document_file")
+    @Type(type="org.hibernate.type.BinaryType")
+    private byte[] file;
 
     @Column(name = "active", updatable = false, nullable = false)
     private Boolean active;
