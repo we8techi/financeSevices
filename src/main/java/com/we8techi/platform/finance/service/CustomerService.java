@@ -7,36 +7,41 @@ import java.util.List;
 
 public interface CustomerService {
     /**
-     * Get all types of customers
-     * @return
+     * Get all types of customers for a company
+     * @param companyId
+     * @return list of customers
      */
-    List<CustomerDTO> getAllCustomer();
+    List<CustomerDTO> getAllCustomerForCompany(Long companyId);
 
     /**
-     * Get customer details
+     * Get customer details for a company
+     * @param companyId
      * @param customerId
      * @return
      */
-    CustomerDTO getCustomerDetails(Long customerId);
+    CustomerDTO getCustomerDetails(Long companyId, Long customerId);
 
     /**
-     * Save the customer
+     * Save the customer for a company
+     * @param companyId
      * @param customerDTO
-     * @return CustomerDTO
+     * @return
      */
-    CustomerDTO saveCustomer(CustomerDTO customerDTO);
+    CustomerDTO saveCustomer(Long companyId, CustomerDTO customerDTO);
 
     /**
-     * update the customer
+     * update the customer for a company
+     * @param companyId
      * @param customerDTO
-     * @return CustomerDTO
+     * @return
      */
-    CustomerDTO updateCustomer(CustomerDTO customerDTO);
+    CustomerDTO updateCustomer(Long companyId, CustomerDTO customerDTO);
 
     /**
-     * Delete customer details by customerId
+     * Delete customer details by customerId for a company
+     * @param companyId
      * @param customerId
      * @return
      */
-    APIResponse deleteCustomerDetails(Long customerId);
+    APIResponse deleteCustomerDetails(Long companyId, Long customerId);
 }

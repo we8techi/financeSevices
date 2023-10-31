@@ -26,17 +26,17 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
 
     @Override
-    public List<CustomerDTO> getAllCustomer() {
-        log.info("Get All active customers..!!!");
-        List<Customer> customerList = customerRepository.findAll();
+    public List<CustomerDTO> getAllCustomerForCompany(Long companyId) {
+        log.info("Get All active customers for a companyId={}", companyId);
+        List<Customer> customerList = customerRepository.findAllCustomersForCompany(companyId);
         customerList = customerList.stream().filter(rec -> rec.getActive()).collect(Collectors.toList());
         return CustomerMapper.INSTANCE.mapToCustomerDTOList(customerList);
     }
 
     @Override
-    public CustomerDTO getCustomerDetails(Long customerId) {
-        log.info("Get customers details..!!!");
-        Optional<Customer> customerOptional = customerRepository.findById(customerId);
+    public CustomerDTO getCustomerDetails(Long companyId, Long customerId) {
+        log.info("Get customers details for a companyId={} and customerId={}", companyId, customerId);
+        Optional<Customer> customerOptional = customerRepository.getCustomerByCompIdAndCustId(companyId, customerId);
         if(customerOptional.isPresent()) {
             return CustomerMapper.INSTANCE.mapCustomerDto(customerOptional.get());
         }
@@ -44,15 +44,16 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
-        log.info("Save customer..!!!");
+    public CustomerDTO saveCustomer(Long companyId, CustomerDTO customerDTO) {
+        log.info("Save customer for a companyId={}", companyId);
         Customer customer = customerRepository.save(CustomerMapper.INSTANCE.mapToCustomer(customerDTO));
+        log.info("Customer saved successfully.");
         return CustomerMapper.INSTANCE.mapCustomerDto(customer);
     }
 
     @Override
-    public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
-        log.info("Update customer..!!!");
+    public CustomerDTO updateCustomer(Long companyId, CustomerDTO customerDTO) {
+        log.info("Update customer for a companyId={}", companyId);
         boolean isUpdatable = true;
         if(Objects.isNull(customerDTO.getId()) || Objects.isNull(customerDTO.getCompanyId()) ) {
             isUpdatable = false;
@@ -71,9 +72,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public APIResponse deleteCustomerDetails(Long customerId) {
-        log.info("Delete customers details..!!!");
-        Optional<Customer> customerOptional = customerRepository.findById(customerId);
+    public APIResponse deleteCustomerDetails(Long companyId, Long customerId) {
+        log.info("Delete customers details for a companyId={}", companyId);
+        Optional<Customer> customerOptional = customerRepository.getCustomerByCompIdAndCustId(companyId, customerId);
         if(customerOptional.isPresent()) {
             customerRepository.deleteCustomerDetails(customerId);
             return new APIResponse("Customer deleted successfully", HttpStatus.OK);
