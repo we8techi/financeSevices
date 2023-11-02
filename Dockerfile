@@ -9,7 +9,7 @@ RUN mvn clean package -DskipTests
 # Package stage
 #
 FROM openjdk:11-jdk-slim
-COPY --from=build /target/finance-0.0.1.jar finance.jar
+COPY --from=build /target/finance-service-1.0.0-SNAPSHOT.jar finance.jar
 
 # ENV PORT=8080
 EXPOSE 8080
