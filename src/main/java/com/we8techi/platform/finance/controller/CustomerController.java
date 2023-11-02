@@ -15,55 +15,55 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/{companyId}")
 @PreAuthorize("isAuthenticated() and " + "hasAnyAuthority('ADMIN','USER')")
 public class CustomerController {
 
     private final CustomerService customerService;
 
     @GetMapping("/customers")
-    public ResponseEntity<List<CustomerDTO>> getAllCustomers() {
-        log.info("Fetch all customer details method....");
+    public ResponseEntity<List<CustomerDTO>> getAllCustomers(@PathVariable("companyId") Long companyId) {
+        log.info("Fetch all customer details for a companyId={} ", companyId);
 
-        List<CustomerDTO> customerDTOList = customerService.getAllCustomer();
+        List<CustomerDTO> customerDTOList = customerService.getAllCustomerForCompany(companyId);
 
         return new ResponseEntity<>(customerDTOList, HttpStatus.OK);
     }
 
     @GetMapping("/customers/{customerId}")
-    public ResponseEntity<CustomerDTO> getCustomerDetails(@PathVariable("customerId") Long customerId) {
+    public ResponseEntity<CustomerDTO> getCustomerDetails(@PathVariable("companyId") Long companyId, @PathVariable("customerId") Long customerId) {
         log.info("Fetch customer details by customerId method....");
 
-        CustomerDTO customerDTO = customerService.getCustomerDetails(customerId);
+        CustomerDTO customerDTO = customerService.getCustomerDetails(companyId, customerId);
 
         return new ResponseEntity<>(customerDTO, HttpStatus.OK);
     }
 
 
     @PostMapping("/customers")
-    public ResponseEntity<CustomerDTO> saveCustomerDetails(@RequestBody CustomerDTO customerDTO) {
+    public ResponseEntity<CustomerDTO> saveCustomerDetails(@PathVariable("companyId") Long companyId, @RequestBody CustomerDTO customerDTO) {
         log.info("Inside Customer controller method to create a customer .......");
 
-        CustomerDTO resultDTO = customerService.saveCustomer(customerDTO);
+        CustomerDTO resultDTO = customerService.saveCustomer(companyId, customerDTO);
 
         return new ResponseEntity<>(resultDTO, HttpStatus.CREATED);
     }
 
     @PutMapping("/customers")
-    public ResponseEntity<CustomerDTO> updateCustomerDetails(@RequestBody CustomerDTO customerDTO) {
+    public ResponseEntity<CustomerDTO> updateCustomerDetails(@PathVariable("companyId") Long companyId, @RequestBody CustomerDTO customerDTO) {
         log.info("Inside Customer controller method to update a customer details .......");
 
-        CustomerDTO resultDTO = customerService.updateCustomer(customerDTO);
+        CustomerDTO resultDTO = customerService.updateCustomer(companyId, customerDTO);
 
         return new ResponseEntity<>(resultDTO, HttpStatus.OK);
     }
 
 
     @DeleteMapping("/customers/{customerId}")
-    public ResponseEntity<APIResponse> deleteCustomerDetails(@PathVariable("customerId") Long customerId) {
+    public ResponseEntity<APIResponse> deleteCustomerDetails(@PathVariable("companyId") Long companyId, @PathVariable("customerId") Long customerId) {
         log.info("Delete customer details by customerId method....");
 
-        APIResponse apiResponse = customerService.deleteCustomerDetails(customerId);
+        APIResponse apiResponse = customerService.deleteCustomerDetails(companyId, customerId);
 
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
