@@ -35,8 +35,11 @@ public class CustomerDocuments implements Serializable {
     @Column(name = "document_name")
     private String documentName;
 
+    @Column(name = "document_ext")
+    private String documentExtension;
+
     @Column(name = "document_size")
-    private Integer documentSize;
+    private Long documentSize;
 
     @Column(name = "document_type")
     private String documentType;

@@ -17,7 +17,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Query("FROM Customer where companyId = :companyId")
     List<Customer> findAllCustomersForCompany(@Param("companyId") Long companyId);
 
-    @Query("FROM Customer where companyId = :companyId and id = :customerId")
+    @Query("FROM Customer where companyId = :companyId and id = :customerId and active = true")
     Optional<Customer> getCustomerByCompIdAndCustId(@Param("companyId") Long companyId, @Param("customerId") Long customerId);
 
     @Modifying

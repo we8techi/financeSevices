@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.Date;
 
 /**
@@ -16,23 +15,14 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CustomerDTO {
+public class CustomerDocumentsDTO {
     private Long id;
-    private Long companyId;
-    private String occupation;
-    private String customerType;
-    private String mobileNumber;
-    private String area;
-    private Integer score;
-    private String name;
-    private Integer age;
-    private String panDetails;
-    private String adharDetails;
-    private String addressProof;
-    private String city;
-    private String district;
-    private String state;
-    private String pincode;
+    private Long customerId;
+    private String documentName;
+    private String documentExtension;
+    private Long documentSize;
+    private String documentType;
+    private byte[] file;
     private Boolean active;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date created;

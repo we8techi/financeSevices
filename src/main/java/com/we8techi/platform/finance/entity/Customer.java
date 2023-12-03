@@ -33,6 +33,21 @@ public class Customer implements Serializable {
     @Column(name = "company_id", nullable = false)
     private Long companyId;
 
+    @Column(name = "occupation")
+    private String occupation;
+
+    @Column(name = "customer_type")
+    private String customerType;
+
+    @Column(name = "mobile_no")
+    private String mobileNumber;
+
+    @Column(name = "area")
+    private String area;
+
+    @Column(name = "score")
+    private Integer score;
+
     @Column(name = "name")
     private String name;
 
@@ -47,6 +62,18 @@ public class Customer implements Serializable {
 
     @Column(name = "address_proof")
     private String addressProof;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "district")
+    private String district;
+
+    @Column(name = "state")
+    private String state;
+
+    @Column(name = "pincode")
+    private String pincode;
 
     @Column(name = "active", updatable = false, nullable = false)
     private Boolean active;
