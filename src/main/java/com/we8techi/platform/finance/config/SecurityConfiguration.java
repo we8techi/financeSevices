@@ -28,8 +28,10 @@ public class SecurityConfiguration {
 
     private static final String[] AUTH_WHITELIST = {
             "/api/authenticate",
+            "/swagger-resources/**",
             "/swagger-ui.html",
             "/swagger-ui/**",
+            "/v2/api-docs",
             "/actuator/health"
     };
 

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
@@ -31,5 +32,15 @@ public class FinanceExceptionController extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleApplicationException(ApplicationException ex) {
         return new ResponseEntity<>(new APIResponse(ex.getMessage(), ex.getStatus()), ex.getStatus());
     }
+    
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<Object> handleMaxSizeException(MaxUploadSizeExceededException ex) {
+        return new ResponseEntity<>(new APIResponse(ex.getMessage(), HttpStatus.BAD_REQUEST), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    
+//    @ExceptionHandler(MaxUploadSizeExceededException.class)
+//    public ResponseEntity<Object> handleMaxSizeException(MaxUploadSizeExceededException ex) {
+//    	return new ResponseEntity<>(new APIResponse(ex.getMessage(), HttpStatus.BAD_REQUEST),"Unable to upload. File is too large!");
+//    }
 
 }
