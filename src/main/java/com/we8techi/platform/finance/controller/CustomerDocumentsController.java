@@ -19,7 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/{companyId}")
-@PreAuthorize("isAuthenticated() and " + "hasAnyAuthority('ADMIN','USER')")
+@PreAuthorize("isAuthenticated() and " + "hasAnyAuthority('ADMIN','USER','SUPER_ADMIN')")
 public class CustomerDocumentsController {
 
     private final CustomerDocumentsService customerDocumentsService;

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
-@PreAuthorize("isAuthenticated() and " + "hasAuthority('ADMIN')")
+@PreAuthorize("isAuthenticated() and " + "hasAuthority('ADMIN', 'SUPER_ADMIN')")
 public class LoanController {
 
     private final LoanService loanService;

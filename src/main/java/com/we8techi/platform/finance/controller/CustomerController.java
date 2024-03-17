@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/{companyId}")
-@PreAuthorize("isAuthenticated() and " + "hasAnyAuthority('ADMIN','USER')")
+@PreAuthorize("isAuthenticated() and " + "hasAnyAuthority('ADMIN','USER', 'SUPER_ADMIN')")
 public class CustomerController {
 
     private final CustomerService customerService;
