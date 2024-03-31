@@ -3,7 +3,6 @@ package com.we8techi.platform.finance.service;
 import com.we8techi.platform.finance.entity.LoanAccount;
 import com.we8techi.platform.finance.objects.LoanCalRequest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface LoanService {

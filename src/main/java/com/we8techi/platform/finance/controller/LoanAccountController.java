@@ -3,8 +3,6 @@ package com.we8techi.platform.finance.controller;
 import com.we8techi.platform.finance.entity.LoanAccount;
 import com.we8techi.platform.finance.objects.LoanCalRequest;
 import com.we8techi.platform.finance.service.LoanService;
-import com.we8techi.platform.finance.service.impl.LoanServiceImpl;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j

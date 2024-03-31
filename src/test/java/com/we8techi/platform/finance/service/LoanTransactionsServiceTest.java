@@ -9,9 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.math.BigDecimal;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -29,7 +28,7 @@ class LoanTransactionsServiceImplTest {
     public void testCreateLoanTransaction() {
         // Create a sample LoanTransaction object
         LoanTransactions loanTransaction = new LoanTransactions();
-        loanTransaction.setAmount(Double.valueOf(1000));
+        loanTransaction.setAmount(1000.0);
 
         // Mock the repository save method
         when(loanTransactionRepository.save(any())).thenReturn(loanTransaction);

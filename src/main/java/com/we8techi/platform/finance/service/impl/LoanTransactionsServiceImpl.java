@@ -3,7 +3,6 @@ package com.we8techi.platform.finance.service.impl;
 import com.we8techi.platform.finance.entity.LoanTransactions;
 import com.we8techi.platform.finance.repository.LoanTransactionsRepository;
 import com.we8techi.platform.finance.service.LoanTransactionsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

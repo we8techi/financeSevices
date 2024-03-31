@@ -7,7 +7,6 @@ import com.we8techi.platform.finance.repository.LoanAccountRepository;
 import com.we8techi.platform.finance.service.LoanService;
 import com.we8techi.platform.finance.utils.AppUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
