@@ -1,7 +1,7 @@
 package com.we8techi.platform.finance.controller;
 import java.util.List;
 
-import com.we8techi.platform.finance.entity.LoanTransactions;
+import com.we8techi.platform.finance.objects.LoanTransactionsDTO;
 import com.we8techi.platform.finance.service.LoanTransactionsService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -16,22 +16,22 @@ public class LoanTransactionsController {
     }
 
     @PostMapping
-    public LoanTransactions createLoanTransaction(@RequestBody LoanTransactions loanTransaction) {
+    public LoanTransactionsDTO createLoanTransaction(@RequestBody LoanTransactionsDTO loanTransaction) {
         return loanTransactionsService.createLoanTransaction(loanTransaction);
     }
 
     @GetMapping("/{id}")
-    public LoanTransactions getLoanTransactionById(@PathVariable Long id) {
+    public LoanTransactionsDTO getLoanTransactionById(@PathVariable Long id) {
         return loanTransactionsService.getLoanTransactionById(id);
     }
 
     @GetMapping
-    public List<LoanTransactions> getAllLoanTransactions() {
+    public List<LoanTransactionsDTO> getAllLoanTransactions() {
         return loanTransactionsService.getAllLoanTransactions();
     }
 
     @PutMapping("/{id}")
-    public LoanTransactions updateLoanTransaction(@PathVariable Long id, @RequestBody LoanTransactions updatedLoanTransaction) {
+    public LoanTransactionsDTO updateLoanTransaction(@PathVariable Long id, @RequestBody LoanTransactionsDTO updatedLoanTransaction) {
         return loanTransactionsService.updateLoanTransaction(id, updatedLoanTransaction);
     }
 
@@ -41,7 +41,7 @@ public class LoanTransactionsController {
     }
 
     @GetMapping("/by-loan-account/{loanAccountId}")
-    public List<LoanTransactions> getLoanTransactionsByLoanAccountId(@PathVariable Long loanAccountId) {
+    public List<LoanTransactionsDTO> getLoanTransactionsByLoanAccountId(@PathVariable Long loanAccountId) {
         return loanTransactionsService.getLoanTransactionsByLoanAccountId(loanAccountId);
     }
 

@@ -1,6 +1,8 @@
 package com.we8techi.platform.finance.service.impl;
 
 import com.we8techi.platform.finance.entity.LoanTransactions;
+import com.we8techi.platform.finance.mapper.LoanTransactionsMapper;
+import com.we8techi.platform.finance.objects.LoanTransactionsDTO;
 import com.we8techi.platform.finance.repository.LoanTransactionsRepository;
 import com.we8techi.platform.finance.service.LoanTransactionsService;
 import org.springframework.stereotype.Service;
@@ -14,24 +16,31 @@ public class LoanTransactionsServiceImpl implements LoanTransactionsService {
         this.loanTransactionRepository = loanTransactionRepository;
     }
 
-    public LoanTransactions createLoanTransaction(LoanTransactions loanTransaction) {
-        return loanTransactionRepository.save(loanTransaction);
+    public LoanTransactionsDTO createLoanTransaction(LoanTransactionsDTO loanTransactionsDTO) {
+        return LoanTransactionsMapper.INSTANCE.toDto(
+                loanTransactionRepository.save(LoanTransactionsMapper.INSTANCE.toEntity(loanTransactionsDTO))
+        );
+
     }
 
-    public LoanTransactions getLoanTransactionById(Long id) {
-        return loanTransactionRepository.findById(id).orElse(null);
+    public LoanTransactionsDTO getLoanTransactionById(Long id) {
+        return LoanTransactionsMapper.INSTANCE.toDto(
+                loanTransactionRepository.findById(id).orElse(null)
+        );
     }
 
-    public List<LoanTransactions> getAllLoanTransactions() {
-        return loanTransactionRepository.findAll();
+    public List<LoanTransactionsDTO> getAllLoanTransactions() {
+        return LoanTransactionsMapper.INSTANCE.toDtoList(
+                loanTransactionRepository.findAll()
+                );
     }
 
-    public LoanTransactions updateLoanTransaction(Long id, LoanTransactions updatedLoanTransaction) {
+    public LoanTransactionsDTO updateLoanTransaction(Long id, LoanTransactionsDTO updatedLoanTransaction) {
         LoanTransactions existingLoanTransaction = loanTransactionRepository.findById(id).orElse(null);
         if (existingLoanTransaction != null) {
-            // Update fields as needed
-            // e.g., existingLoanTransaction.setAmount(updatedLoanTransaction.getAmount());
-            return loanTransactionRepository.save(existingLoanTransaction);
+            return LoanTransactionsMapper.INSTANCE.toDto(
+                    loanTransactionRepository.save(LoanTransactionsMapper.INSTANCE.toEntity(updatedLoanTransaction))
+            );
         }
         return null;
     }
@@ -41,8 +50,10 @@ public class LoanTransactionsServiceImpl implements LoanTransactionsService {
     }
 
     @Override
-    public List<LoanTransactions> getLoanTransactionsByLoanAccountId(Long loanAccountId) {
-        return loanTransactionRepository.findByLoanAccountId(loanAccountId);
+    public List<LoanTransactionsDTO> getLoanTransactionsByLoanAccountId(Long loanAccountId) {
+        return LoanTransactionsMapper.INSTANCE.toDtoList(
+                loanTransactionRepository.findByLoanAccountId(loanAccountId)
+        );
     }
 
 }

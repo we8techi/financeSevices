@@ -45,7 +45,7 @@ public class LoanAccountServiceImpl implements LoanAccountService {
     @Override
     public LoanAccountDTO updateLoanAccount(Long id, LoanAccountDTO updatedLoanAccountDTO) {
 
-        Optional<LoanAccount> optionalLoanAccount = loanAccountRepository.findById(id);
+        Optional<LoanAccount> optionalLoanAccount = loanAccountRepository.getLoanAccountById(id);
         if (optionalLoanAccount.isPresent()) {
             return LoanAccountMapperFactory.INSTANCE.toDto(
                     loanAccountRepository.save(

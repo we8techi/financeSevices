@@ -13,29 +13,49 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LoanAccountDTO {
+public class PigmiAccountDTO {
+
 
     private Long id;
+
     private Long customerId;
+
+
     private Double interestRate;
-    private Double principalAmount;
-    private Double totalAmount;
-    private Double collectedAmount;
+
+
+    private Double amount;
+
+
     private String paymentDetails;
+
+
     private String paymentMode;
+
+
     private Integer numberOfDays;
-    private String loanType;
-    private String loanStatus;
+
+
+    private String pigmiStatus;
+
+
     private Boolean active;
+
+
     private Date created;
+
+
     private String createdBy;
+
+
     private Date updated;
+
+
     private String updatedBy;
 
 }

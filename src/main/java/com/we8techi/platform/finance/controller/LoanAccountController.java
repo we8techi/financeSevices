@@ -77,8 +77,9 @@ public class LoanAccountController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteLoanAccount(@PathVariable Long id) {
+    public ResponseEntity<String> deleteLoanAccount(@PathVariable Long id) {
         loanAccountService.deleteLoanAccount(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Loan account # " + id + " is deleted successfully! " );
     }
     @PostMapping("/loan/calculate")
     public ResponseEntity<Double> registerUser(@RequestBody LoanCalRequest loanCalRequest) {

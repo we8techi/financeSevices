@@ -1,20 +1,23 @@
 package com.we8techi.platform.finance.service;
 
 import com.we8techi.platform.finance.entity.LoanTransactions;
+import com.we8techi.platform.finance.objects.LoanTransactionsDTO;
+import com.we8techi.platform.finance.objects.PigmiAccountDTO;
 
 import java.util.List;
 
 public interface LoanTransactionsService {
-    LoanTransactions createLoanTransaction(LoanTransactions loanTransaction);
+    LoanTransactionsDTO createLoanTransaction(LoanTransactionsDTO loanTransaction);
 
-    LoanTransactions getLoanTransactionById(Long id);
+    LoanTransactionsDTO getLoanTransactionById(Long id);
 
-    List<LoanTransactions> getAllLoanTransactions();
+    List<LoanTransactionsDTO> getAllLoanTransactions();
 
-    LoanTransactions updateLoanTransaction(Long id, LoanTransactions updatedLoanTransaction);
+    LoanTransactionsDTO updateLoanTransaction(Long id, LoanTransactionsDTO updatedLoanTransaction);
 
     void deleteLoanTransaction(Long id);
 
-    List<LoanTransactions> getLoanTransactionsByLoanAccountId(Long loanAccountId);
+    List<LoanTransactionsDTO> getLoanTransactionsByLoanAccountId(Long loanAccountId);
 
 }
+
