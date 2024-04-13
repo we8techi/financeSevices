@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface LoanTransactionsMapper {
-    public static final LoanTransactionsMapper INSTANCE = Mappers.getMapper(LoanTransactionsMapper.class);
+    LoanTransactionsMapper INSTANCE = Mappers.getMapper(LoanTransactionsMapper.class);
 
     LoanTransactionsDTO toDto(LoanTransactions entity);
 

@@ -1,8 +1,6 @@
 package com.we8techi.platform.finance.service;
 
-import com.we8techi.platform.finance.entity.LoanTransactions;
 import com.we8techi.platform.finance.objects.LoanTransactionsDTO;
-import com.we8techi.platform.finance.objects.PigmiAccountDTO;
 
 import java.util.List;
 

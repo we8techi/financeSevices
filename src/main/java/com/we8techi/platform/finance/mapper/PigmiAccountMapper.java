@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface PigmiAccountMapper {
 
-    public static final PigmiAccountMapper INSTANCE = Mappers.getMapper(PigmiAccountMapper.class);
+    PigmiAccountMapper INSTANCE = Mappers.getMapper(PigmiAccountMapper.class);
     PigmiAccountDTO toDto(PigmiAccount entity);
 
     PigmiAccount toEntity(PigmiAccountDTO dto);
