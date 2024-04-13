@@ -56,4 +56,20 @@ public interface CustomerService {
      * @param customerDocumentsDTO
      */
     void uploadCustomerDocuments(Long companyId, Long customerId, MultipartFile file, CustomerDocumentsDTO customerDocumentsDTO) throws IOException;
+
+    /**
+     * Retrieve Customer specific documents
+     * @param customerId
+     * @return
+     */
+    List<CustomerDocumentsDTO> retrieveCustomerDocumentsByCustId(Long customerId);
+
+
+    /**
+     * Retrieve customer documents by company id and document type
+     * @param companyId
+     * @param documentType
+     * @return
+     */
+    List<CustomerDocumentsDTO> retrieveCustDocumentsByCompanyIdAndType(Long companyId, String documentType);
 }

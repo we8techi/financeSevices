@@ -18,10 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -112,6 +114,42 @@ public class CustomerServiceImpl implements CustomerService {
             log.error("Exception occurred while customer document upload with message ={}", ex.getMessage());
             throw new ApplicationException("Exception occurred while customer document upload", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @Override
+    @Transactional
+    public List<CustomerDocumentsDTO> retrieveCustomerDocumentsByCustId(Long customerId) {
+        List<CustomerDocumentsDTO> customerDocumentsDTOList = new ArrayList<>();
+        try{
+            log.info("Retrieve customer document for a customerId ={}", customerId);
+            List<CustomerDocuments> customerDocumentsList = customerDocumentsRepository.findByCustomerId(customerId);
+            if(!CollectionUtils.isEmpty(customerDocumentsList)) {
+                customerDocumentsDTOList = CustomerDocumentsMapper.INSTANCE.mapToCustomerDocumentsDTO(customerDocumentsList);
+             log.info("Retrieved customer documents successfully !!!");
+            }
+        } catch (Exception ex){
+            log.error("Exception occurred while retrieving customer documents with message ={}", ex.getMessage());
+            throw new ApplicationException("Exception occurred while retrieving customer documents", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return customerDocumentsDTOList;
+    }
+
+    @Override
+    @Transactional
+    public List<CustomerDocumentsDTO> retrieveCustDocumentsByCompanyIdAndType(Long companyId, String documentType) {
+        List<CustomerDocumentsDTO> customerDocumentsDTOList = new ArrayList<>();
+        try{
+            log.info("Retrieve customer document for a companyId ={} and docType = {}", companyId, documentType);
+            List<CustomerDocuments> customerDocumentsList = customerDocumentsRepository.findByCompanyIdAndDocumentType(companyId, documentType);
+            if(!CollectionUtils.isEmpty(customerDocumentsList)) {
+                customerDocumentsDTOList = CustomerDocumentsMapper.INSTANCE.mapToCustomerDocumentsDTO(customerDocumentsList);
+                log.info("Retrieved customer documents successfully !!!");
+            }
+        } catch (Exception ex){
+            log.error("Exception occurred while retrieving customer documents with message ={}", ex.getMessage());
+            throw new ApplicationException("Exception occurred while retrieving customer documents", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return customerDocumentsDTOList;
     }
 
 
