@@ -3,9 +3,11 @@ import java.util.List;
 
 import com.we8techi.platform.finance.entity.LoanTransactions;
 import com.we8techi.platform.finance.service.LoanTransactionsService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/loan-transactions")
+@PreAuthorize("isAuthenticated() and " + "hasAnyAuthority('ADMIN','USER', 'SUPER_ADMIN')")
 public class LoanTransactionsController {
     private final LoanTransactionsService loanTransactionsService;
 
