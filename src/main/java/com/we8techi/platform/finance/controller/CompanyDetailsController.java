@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
-@PreAuthorize("isAuthenticated() and " + "hasAuthority('SUPER_ADMIN')")
+//@PreAuthorize("isAuthenticated() and " + "hasAuthority('SUPER_ADMIN')")
 public class CompanyDetailsController {
 
     private final CompanyDetailsService companyDetailsService;

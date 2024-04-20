@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/api")
-@PreAuthorize("isAuthenticated() and " + "hasAuthority('ADMIN', 'SUPER_ADMIN')")
+//@PreAuthorize("isAuthenticated() and " + "hasAuthority('ADMIN', 'SUPER_ADMIN')")
 public class RegistrationController {
 
     @Autowired
