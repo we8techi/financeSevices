@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
+@CrossOrigin
 @Slf4j
 @RequiredArgsConstructor
 @RestController
