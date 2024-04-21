@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.we8techi.platform.finance.entity.Customer;
 import com.we8techi.platform.finance.repository.CustomerRepository;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/customer")
 public class CommonController {

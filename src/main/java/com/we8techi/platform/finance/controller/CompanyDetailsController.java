@@ -16,6 +16,7 @@ import java.util.List;
  * @author dhijadhav
  */
 
+@CrossOrigin
 @Slf4j
 @RequiredArgsConstructor
 @RestController

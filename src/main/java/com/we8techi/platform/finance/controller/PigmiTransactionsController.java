@@ -1,6 +1,5 @@
 package com.we8techi.platform.finance.controller;
 
-
 import com.we8techi.platform.finance.objects.PigmiTransactionsDTO;
 import com.we8techi.platform.finance.service.PigmiTransactionsService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +10,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+@CrossOrigin
 @Slf4j
 //@PreAuthorize("isAuthenticated() and " + "hasAnyAuthority('ADMIN','USER', 'SUPER_ADMIN')")
 @RestController

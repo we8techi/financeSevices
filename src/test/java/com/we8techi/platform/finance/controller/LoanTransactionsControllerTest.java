@@ -1,6 +1,6 @@
 package com.we8techi.platform.finance.controller;
 
-import com.we8techi.platform.finance.entity.LoanTransactions;
+/*import com.we8techi.platform.finance.entity.LoanTransactions;
 import com.we8techi.platform.finance.service.LoanTransactionsService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;*/
 /*
 @RunWith(SpringRunner.class)
 @WebMvcTest(LoanTransactionsController.class)

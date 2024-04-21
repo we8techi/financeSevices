@@ -3,8 +3,13 @@ import java.util.List;
 
 import com.we8techi.platform.finance.objects.LoanTransactionsDTO;
 import com.we8techi.platform.finance.service.LoanTransactionsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+
+@CrossOrigin
+@Slf4j
 @RestController
 @RequestMapping("/api/loan-transactions")
 //@PreAuthorize("isAuthenticated() and " + "hasAnyAuthority('ADMIN','USER', 'SUPER_ADMIN')")
