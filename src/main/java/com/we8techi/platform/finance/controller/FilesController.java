@@ -21,7 +21,7 @@ import com.we8techi.platform.finance.objects.FileDTO;
 import com.we8techi.platform.finance.objects.FileResponseDTO;
 import com.we8techi.platform.finance.service.FileService;
  
-
+@CrossOrigin
 @RestController
 @RequestMapping("files")
 public class FilesController {
