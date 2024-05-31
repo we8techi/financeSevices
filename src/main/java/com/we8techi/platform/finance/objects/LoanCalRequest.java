@@ -17,4 +17,7 @@ public class LoanCalRequest {
     private Double principleAmount;
     private Double interestRate;
     private Integer numberOfDays;
+    private String loanType;
+    private Double passbookCharges;
+    private String disbursementDate;
 }

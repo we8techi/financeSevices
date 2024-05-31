@@ -2,6 +2,7 @@ package com.we8techi.platform.finance.controller;
 
 import com.we8techi.platform.finance.objects.LoanAccountDTO;
 import com.we8techi.platform.finance.objects.LoanCalRequest;
+import com.we8techi.platform.finance.objects.LoanCalResponse;
 import com.we8techi.platform.finance.service.LoanAccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -83,11 +84,9 @@ public class LoanAccountController {
         return ResponseEntity.status(HttpStatus.OK).body("Loan account # " + id + " is deleted successfully! " );
     }
     @PostMapping("/loan/calculate")
-    public ResponseEntity<Double> registerUser(@RequestBody LoanCalRequest loanCalRequest) {
+    public ResponseEntity<LoanCalResponse> loanCalculation(@RequestBody LoanCalRequest loanCalRequest) {
         log.info("Inside Loan controller.......");
-
-        Double result = loanAccountService.calculateLoanAmount(loanCalRequest);
-
+        LoanCalResponse result = loanAccountService.calculateLoanAmount(loanCalRequest);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     @GetMapping("/by-customer/{customerId}")
