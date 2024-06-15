@@ -1,7 +1,6 @@
 package com.we8techi.platform.finance.service.impl;
 
 import com.we8techi.platform.finance.entity.Expense;
-import com.we8techi.platform.finance.entity.Income;
 import com.we8techi.platform.finance.mapper.ExpenseMapper;
 import com.we8techi.platform.finance.objects.ExpenseDTO;
 import com.we8techi.platform.finance.repository.ExpenseRepository;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
 import java.util.stream.Collectors;
 
 @Service

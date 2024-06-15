@@ -1,9 +1,6 @@
 package com.we8techi.platform.finance.service;
 
-import com.we8techi.platform.finance.entity.Income;
 import com.we8techi.platform.finance.objects.IncomeDTO;
-
-import java.util.List;
 
 import java.util.List;
 import java.util.Optional;
