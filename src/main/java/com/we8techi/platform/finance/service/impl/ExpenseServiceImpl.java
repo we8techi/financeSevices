@@ -23,26 +23,26 @@ public class ExpenseServiceImpl implements ExpenseService {
     private ExpenseMapper expenseMapper;
 
     @Override
-    public ExpenseDTO saveExpense(ExpenseDTO expenseDTO) {
+    public ExpenseDTO saveExpense(Long companyId,ExpenseDTO expenseDTO) {
         Expense expense = expenseMapper.toEntity(expenseDTO);
         Expense savedExpense = expenseRepository.save(expense);
         return expenseMapper.toDto(savedExpense);
     }
 
     @Override
-    public Optional<ExpenseDTO> getExpenseById(Long id) {
+    public Optional<ExpenseDTO> getExpenseById(Long companyId,Long id) {
         Optional<Expense> expense = expenseRepository.findById(id);
         return expense.map(expenseMapper::toDto);
     }
 
     @Override
-    public List<ExpenseDTO> getAllExpenses() {
+    public List<ExpenseDTO> getAllExpenses(Long companyId) {
         List<Expense> expenses = expenseRepository.findAll();
         return expenses.stream().map(expenseMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public ExpenseDTO updateExpense(Long id, ExpenseDTO expenseDTO) {
+    public ExpenseDTO updateExpense(Long companyId,Long id, ExpenseDTO expenseDTO) {
         return expenseRepository.findById(id).map(existingExpense -> {
             expenseMapper.toEntity(expenseDTO); // Update entity with DTO values
             existingExpense.setUpdatedAt(LocalDateTime.now());
@@ -52,11 +52,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public void deleteExpense(Long id) {
+    public void deleteExpense(Long companyId,Long id) {
         expenseRepository.deleteById(id);
     }
-
-
 }
-
-
