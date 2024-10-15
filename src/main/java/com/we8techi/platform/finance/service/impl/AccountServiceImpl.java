@@ -2,7 +2,7 @@ package com.we8techi.platform.finance.service.impl;
 
 import com.we8techi.platform.finance.entity.Account;
 import com.we8techi.platform.finance.exception.ApplicationException;
-import com.we8techi.platform.finance.exception.handler.ResourceNotFoundException;
+import com.we8techi.platform.finance.exception.ResourceNotFoundException;
 import com.we8techi.platform.finance.objects.APIResponse;
 import com.we8techi.platform.finance.repository.AccountRepository;
 import com.we8techi.platform.finance.service.AccountService;
