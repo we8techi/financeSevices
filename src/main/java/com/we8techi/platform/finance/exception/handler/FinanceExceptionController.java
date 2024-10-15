@@ -1,6 +1,7 @@
 package com.we8techi.platform.finance.exception.handler;
 
 import com.we8techi.platform.finance.exception.ApplicationException;
+import com.we8techi.platform.finance.exception.ResourceNotFoundException;
 import com.we8techi.platform.finance.objects.APIResponse;
 import com.we8techi.platform.finance.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
