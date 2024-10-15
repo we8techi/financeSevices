@@ -40,7 +40,7 @@ public class FinanceExceptionController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<APIResponse> handleResourceNotFoundException(ResourceNotFoundException ex){
-        return new ResponseEntity<>(new APIResponse(ex.getMessage(), HttpStatus.BAD_REQUEST), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new APIResponse(ex.getMessage(), HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
     }
     
 //    @ExceptionHandler(MaxUploadSizeExceededException.class)
