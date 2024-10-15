@@ -56,4 +56,7 @@ public class Income implements Serializable {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @Column(name = "company_id", nullable = false)
+    private Long companyId;
+
 }
