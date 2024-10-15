@@ -1,4 +1,4 @@
-package com.we8techi.platform.finance.exception.handler;
+package com.we8techi.platform.finance.exception;
 
 public class ResourceNotFoundException extends RuntimeException{
 
