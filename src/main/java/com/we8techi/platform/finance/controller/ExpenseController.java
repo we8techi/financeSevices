@@ -14,35 +14,35 @@ import java.util.Optional;
 @Slf4j
 @PreAuthorize("isAuthenticated() and " + "hasAnyAuthority('ADMIN','USER', 'SUPER_ADMIN')")
 @RestController
-@RequestMapping("/api/expenses")
+@RequestMapping("/api//{companyId}expenses")
 public class ExpenseController {
 
     @Autowired
     private ExpenseService expenseService;
 
     @PostMapping
-    public ResponseEntity<ExpenseDTO> createExpense(@RequestBody ExpenseDTO expenseDTO) {
-        ExpenseDTO createdExpense = expenseService.saveExpense(expenseDTO);
+    public ResponseEntity<ExpenseDTO> createExpense(@PathVariable("companyId") Long companyId,@RequestBody ExpenseDTO expenseDTO) {
+        ExpenseDTO createdExpense = expenseService.saveExpense(companyId,expenseDTO);
         return new ResponseEntity<>(createdExpense, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ExpenseDTO> getExpenseById(@PathVariable Long id) {
-        Optional<ExpenseDTO> expenseDTO = expenseService.getExpenseById(id);
+    public ResponseEntity<ExpenseDTO> getExpenseById(@PathVariable("companyId") Long companyId,@PathVariable Long id) {
+        Optional<ExpenseDTO> expenseDTO = expenseService.getExpenseById(companyId,id);
         return expenseDTO.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping
-    public ResponseEntity<List<ExpenseDTO>> getAllExpenses() {
-        List<ExpenseDTO> expenses = expenseService.getAllExpenses();
+    public ResponseEntity<List<ExpenseDTO>> getAllExpenses(@PathVariable("companyId") Long companyId) {
+        List<ExpenseDTO> expenses = expenseService.getAllExpenses(companyId);
         return new ResponseEntity<>(expenses, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ExpenseDTO> updateExpense(@PathVariable Long id, @RequestBody ExpenseDTO expenseDTO) {
+    public ResponseEntity<ExpenseDTO> updateExpense(@PathVariable("companyId") Long companyId,@PathVariable Long id, @RequestBody ExpenseDTO expenseDTO) {
         try {
-            ExpenseDTO updatedExpense = expenseService.updateExpense(id, expenseDTO);
+            ExpenseDTO updatedExpense = expenseService.updateExpense(companyId, id, expenseDTO);
             return new ResponseEntity<>(updatedExpense, HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -50,9 +50,9 @@ public class ExpenseController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteExpense(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteExpense(@PathVariable("companyId") Long companyId,@PathVariable Long id) {
         try {
-            expenseService.deleteExpense(id);
+            expenseService.deleteExpense(companyId,id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

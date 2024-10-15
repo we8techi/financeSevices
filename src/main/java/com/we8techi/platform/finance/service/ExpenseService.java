@@ -7,14 +7,14 @@ import java.util.Optional;
 
 public interface ExpenseService {
 
-    ExpenseDTO saveExpense(ExpenseDTO expenseDTO);
+    ExpenseDTO saveExpense(Long companyId,ExpenseDTO expenseDTO);
 
-    Optional<ExpenseDTO> getExpenseById(Long id);
+    Optional<ExpenseDTO> getExpenseById(Long companyId,Long id);
 
-    List<ExpenseDTO> getAllExpenses();
+    List<ExpenseDTO> getAllExpenses(Long companyId);
 
-    ExpenseDTO updateExpense(Long id, ExpenseDTO expenseDTO);
+    ExpenseDTO updateExpense(Long companyId,Long id, ExpenseDTO expenseDTO);
 
-    void deleteExpense(Long id);
+    void deleteExpense(Long companyId,Long id);
 }
 

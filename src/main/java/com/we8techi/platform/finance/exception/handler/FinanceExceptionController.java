@@ -37,6 +37,11 @@ public class FinanceExceptionController extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleMaxSizeException(MaxUploadSizeExceededException ex) {
         return new ResponseEntity<>(new APIResponse(ex.getMessage(), HttpStatus.BAD_REQUEST), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<APIResponse> handleResourceNotFoundException(ResourceNotFoundException ex){
+        return new ResponseEntity<>(new APIResponse(ex.getMessage(), HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
+    }
     
 //    @ExceptionHandler(MaxUploadSizeExceededException.class)
 //    public ResponseEntity<Object> handleMaxSizeException(MaxUploadSizeExceededException ex) {

@@ -7,17 +7,13 @@ import java.util.Optional;
 
 public interface IncomeService {
 
-    IncomeDTO saveIncome(IncomeDTO incomeDTO);
+    IncomeDTO saveIncome(Long companyId,IncomeDTO incomeDTO);
 
-    Optional<IncomeDTO> getIncomeById(Long id);
+    Optional<IncomeDTO> getIncomeById(Long companyId,Long id);
 
-    List<IncomeDTO> getAllIncomes();
+    List<IncomeDTO> getAllIncomes(Long companyId);
 
-    IncomeDTO updateIncome(Long id, IncomeDTO incomeDTO);
+    IncomeDTO updateIncome(Long companyId,Long id, IncomeDTO incomeDTO);
 
-    void deleteIncome(Long id);
+    void deleteIncome(Long companyId,Long id);
 }
-
-
-
-
