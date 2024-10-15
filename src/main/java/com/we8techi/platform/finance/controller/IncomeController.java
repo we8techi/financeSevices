@@ -12,37 +12,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 @Slf4j
-@PreAuthorize("isAuthenticated() and " + "hasAnyAuthority('ADMIN','USER', 'SUPER_ADMIN')")
+//@PreAuthorize("isAuthenticated() and " + "hasAnyAuthority('ADMIN','USER', 'SUPER_ADMIN')")
 @RestController
-@RequestMapping("/api/incomes")
+@RequestMapping("/api/{companyId}/incomes")
 public class IncomeController {
 
     @Autowired
     private IncomeService incomeService;
 
     @PostMapping
-    public ResponseEntity<IncomeDTO> createIncome(@RequestBody IncomeDTO incomeDTO) {
-        IncomeDTO createdIncome = incomeService.saveIncome(incomeDTO);
+    public ResponseEntity<IncomeDTO> createIncome(@PathVariable("companyId") Long companyId,@RequestBody IncomeDTO incomeDTO) {
+        IncomeDTO createdIncome = incomeService.saveIncome(companyId,incomeDTO);
         return new ResponseEntity<>(createdIncome, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<IncomeDTO> getIncomeById(@PathVariable Long id) {
-        Optional<IncomeDTO> incomeDTO = incomeService.getIncomeById(id);
+    public ResponseEntity<IncomeDTO> getIncomeById(@PathVariable("companyId") Long companyId,@PathVariable Long id) {
+        Optional<IncomeDTO> incomeDTO = incomeService.getIncomeById(companyId,id);
         return incomeDTO.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping
-    public ResponseEntity<List<IncomeDTO>> getAllIncomes() {
-        List<IncomeDTO> incomes = incomeService.getAllIncomes();
+    public ResponseEntity<List<IncomeDTO>> getAllIncomes(@PathVariable("companyId") Long companyId) {
+        List<IncomeDTO> incomes = incomeService.getAllIncomes(companyId);
         return new ResponseEntity<>(incomes, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<IncomeDTO> updateIncome(@PathVariable Long id, @RequestBody IncomeDTO incomeDTO) {
+    public ResponseEntity<IncomeDTO> updateIncome(Long companyId,@PathVariable Long id, @RequestBody IncomeDTO incomeDTO) {
         try {
-            IncomeDTO updatedIncome = incomeService.updateIncome(id, incomeDTO);
+            IncomeDTO updatedIncome = incomeService.updateIncome(companyId,id, incomeDTO);
             return new ResponseEntity<>(updatedIncome, HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -50,9 +50,9 @@ public class IncomeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteIncome(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteIncome(Long companyId,@PathVariable Long id) {
         try {
-            incomeService.deleteIncome(id);
+            incomeService.deleteIncome(companyId,id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
