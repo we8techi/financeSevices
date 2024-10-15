@@ -5,10 +5,14 @@ import com.we8techi.platform.finance.objects.IncomeDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface IncomeMapper {
 
     IncomeMapper INSTANCE = Mappers.getMapper(IncomeMapper.class);
+
+    List<IncomeDTO> mapToIncomeDTOList (List<Income> incomeList);
 
     IncomeDTO toDto(Income income);
 
