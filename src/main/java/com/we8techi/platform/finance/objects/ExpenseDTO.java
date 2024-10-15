@@ -24,5 +24,6 @@ public class ExpenseDTO {
     private String referenceNumber;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Long companyId;
 }
 
