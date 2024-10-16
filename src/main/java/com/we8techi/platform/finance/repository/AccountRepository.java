@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface AccountRepository extends JpaRepository<Account,Long> {
 
-    @Query("FROM Account where  companyId = :companyId and customerId = :customerId")
-    List<Account> findAllAccountsForCust(@Param("companyId") Long companyId, @Param("customerId") Long customerId);
+    @Query("FROM Account where  companyId = :companyId ")
+    List<Account> findAllAccounts(@Param("companyId") Long companyId);
 
 }
