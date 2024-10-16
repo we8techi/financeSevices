@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -23,23 +23,25 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     AccountRepository accountRepository;
+    
     @Override
     public Account createAccount(Account account) {
         log.info("Adding Account..");
         return accountRepository.save(account);
-
     }
 
-    @Override
-    public List<Account> getAllAccountsForCustomer(Long account_id) {
-        return accountRepository.findAll();
-
-    }
 
     @Override
     public Account getAccount(Long account_id) {
         return accountRepository.findById(account_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Account is not available for given id"));
+    }
+
+    @Override
+    public List<Account> getAllAccountsForCustomer(Long companyId,Long customer_id) {
+        log.info("Fetching all active accounts for a customer.."+customer_id);
+        List<Account> accList = accountRepository.findAllAccountsForCust(companyId,customer_id);
+        return accList.stream().filter(acc -> acc.getActive()).collect(Collectors.toList());
     }
 
     @Override
@@ -57,7 +59,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public APIResponse deleteAccount(Long account_id) {
-
         Optional<Account> result = accountRepository.findById(account_id);
         if (result.isPresent()) {
             accountRepository.deleteById(account_id);
