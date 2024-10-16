@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin
@@ -37,6 +38,13 @@ public class AccountController {
         return new ResponseEntity<>(accountDTO, HttpStatus.OK);
     }
 
+    @GetMapping("/accounts/{customerId}/allaccounts")
+    public ResponseEntity<List<Account>> getAllAccountsForCustomer(@PathVariable("companyId") Long companyId,@PathVariable("customerId") Long customerId) {
+        log.info("Fetching All active accounts for a customer....");
+        List<Account> accountList = accountService.getAllAccountsForCustomer(companyId,customerId);
+        return new ResponseEntity<>(accountList, HttpStatus.OK);
+    }
+
     @PutMapping("/accounts/{accountId}")
     public ResponseEntity<Account> updateAccount(@PathVariable("accountId") Long accountId,@RequestBody Account account) {
         log.info("Inside update a account ....");
@@ -54,7 +62,4 @@ public class AccountController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-
-
 }
