@@ -9,7 +9,7 @@ public interface AccountService {
 
     Account createAccount(Account account);
 
-    List<Account> getAllAccountsForCustomer(Long companyId,Long customerId);
+    List<Account> getAllAccounts(Long companyId);
 
     Account getAccount(Long account_id);
 
