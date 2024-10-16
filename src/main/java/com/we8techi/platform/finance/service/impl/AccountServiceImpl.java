@@ -38,9 +38,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Account> getAllAccountsForCustomer(Long companyId,Long customer_id) {
-        log.info("Fetching all active accounts for a customer.."+customer_id);
-        List<Account> accList = accountRepository.findAllAccountsForCust(companyId,customer_id);
+    public List<Account> getAllAccounts(Long companyId) {
+        log.info("Fetching all active accounts");
+        List<Account> accList = accountRepository.findAllAccounts(companyId);
         return accList.stream().filter(acc -> acc.getActive()).collect(Collectors.toList());
     }
 
