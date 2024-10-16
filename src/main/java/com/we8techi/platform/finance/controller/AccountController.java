@@ -38,10 +38,10 @@ public class AccountController {
         return new ResponseEntity<>(accountDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/accounts/{customerId}/allaccounts")
-    public ResponseEntity<List<Account>> getAllAccountsForCustomer(@PathVariable("companyId") Long companyId,@PathVariable("customerId") Long customerId) {
+    @GetMapping("/accounts")
+    public ResponseEntity<List<Account>> getAllAccounts(@PathVariable("companyId") Long companyId) {
         log.info("Fetching All active accounts for a customer....");
-        List<Account> accountList = accountService.getAllAccountsForCustomer(companyId,customerId);
+        List<Account> accountList = accountService.getAllAccounts(companyId);
         return new ResponseEntity<>(accountList, HttpStatus.OK);
     }
 
@@ -62,4 +62,5 @@ public class AccountController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 }
