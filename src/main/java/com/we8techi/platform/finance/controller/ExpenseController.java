@@ -14,7 +14,7 @@ import java.util.Optional;
 @Slf4j
 @PreAuthorize("isAuthenticated() and " + "hasAnyAuthority('ADMIN','USER', 'SUPER_ADMIN')")
 @RestController
-@RequestMapping("/api//{companyId}expenses")
+@RequestMapping("/api/{companyId}/expenses")
 public class ExpenseController {
 
     @Autowired
