@@ -38,6 +38,7 @@ public class AccountController {
         return new ResponseEntity<>(accountDTO, HttpStatus.OK);
     }
 
+
     @GetMapping("/accounts")
     public ResponseEntity<List<Account>> getAllAccounts(@PathVariable("companyId") Long companyId) {
         log.info("Fetching All active accounts for a customer....");

@@ -23,11 +23,11 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     AccountRepository accountRepository;
+    
     @Override
     public Account createAccount(Account account) {
         log.info("Adding Account..");
         return accountRepository.save(account);
-
     }
 
 
@@ -59,7 +59,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public APIResponse deleteAccount(Long account_id) {
-
         Optional<Account> result = accountRepository.findById(account_id);
         if (result.isPresent()) {
             accountRepository.deleteById(account_id);
