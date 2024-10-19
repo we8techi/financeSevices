@@ -40,7 +40,7 @@ public class IncomeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<IncomeDTO> updateIncome(Long companyId,@PathVariable Long id, @RequestBody IncomeDTO incomeDTO) {
+    public ResponseEntity<IncomeDTO> updateIncome(@PathVariable("companyId") Long companyId,@PathVariable Long id, @RequestBody IncomeDTO incomeDTO) {
         try {
             IncomeDTO updatedIncome = incomeService.updateIncome(companyId,id, incomeDTO);
             return new ResponseEntity<>(updatedIncome, HttpStatus.OK);
@@ -50,7 +50,7 @@ public class IncomeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteIncome(Long companyId,@PathVariable Long id) {
+    public ResponseEntity<Void> deleteIncome(@PathVariable("companyId") Long companyId,@PathVariable Long id) {
         try {
             incomeService.deleteIncome(companyId,id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

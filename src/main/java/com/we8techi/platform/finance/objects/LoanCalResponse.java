@@ -1,7 +1,16 @@
 package com.we8techi.platform.finance.objects;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class LoanCalResponse {
 
     LocalDate returnDate;
@@ -15,6 +24,4 @@ public class LoanCalResponse {
     Double dailyCollectionAmount;
     Double monthlyCollectionAmount;
 
-    public LoanCalResponse(LocalDate collectionStartDate, Double perDayInterest, Double thirtyDaysInterest, Double issueAmount, Double passbookCharge, LocalDate collectionStartDate1, String d, double v, Double perDayInterest1, double v1) {
-    }
 }
