@@ -12,4 +12,11 @@ public class APIResponse {
 
     private String message;
     private HttpStatus status;
+    private boolean success;
+
+    public APIResponse(String message, HttpStatus httpStatus) {
+    }
+
+    public APIResponse(boolean success, HttpStatus httpStatus) {
+    }
 }

@@ -17,7 +17,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "loan_transaction")
+@Table(name = "pigmi_transaction")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

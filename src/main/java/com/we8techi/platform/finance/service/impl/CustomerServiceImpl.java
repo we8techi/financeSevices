@@ -1,18 +1,29 @@
 package com.we8techi.platform.finance.service.impl;
 
 import com.we8techi.platform.finance.entity.Customer;
+import com.we8techi.platform.finance.entity.CustomerDocuments;
 import com.we8techi.platform.finance.exception.ApplicationException;
+import com.we8techi.platform.finance.mapper.CustomerDocumentsMapper;
 import com.we8techi.platform.finance.mapper.CustomerMapper;
 import com.we8techi.platform.finance.objects.APIResponse;
 import com.we8techi.platform.finance.objects.CustomerDTO;
+import com.we8techi.platform.finance.objects.CustomerDocumentsDTO;
+import com.we8techi.platform.finance.repository.CustomerDocumentsRepository;
 import com.we8techi.platform.finance.repository.CustomerRepository;
 import com.we8techi.platform.finance.service.CustomerService;
+import com.we8techi.platform.finance.utils.Constants;
+import com.we8techi.platform.finance.utils.CustomerFileUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -24,6 +35,7 @@ import java.util.stream.Collectors;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final CustomerDocumentsRepository customerDocumentsRepository;
 
     @Override
     public List<CustomerDTO> getAllCustomerForCompany(Long companyId) {
@@ -80,6 +92,64 @@ public class CustomerServiceImpl implements CustomerService {
             return new APIResponse("Customer deleted successfully", HttpStatus.OK);
         }
         throw new ApplicationException("Invalid customer details !!! ", HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    @Transactional
+    public void uploadCustomerDocuments(Long companyId, Long customerId, MultipartFile file, CustomerDocumentsDTO customerDocumentsDTO) throws IOException {
+        log.info("Upload customer document for a customerId ={}", customerId);
+        try{
+            String documentName = StringUtils.cleanPath(file.getOriginalFilename());
+            customerDocumentsDTO.setCustomerId(customerId);
+            customerDocumentsDTO.setDocumentName(documentName.split(Constants.DOCUMENT_NAME_SEPARATOR)[0]);
+            customerDocumentsDTO.setFile(CustomerFileUtils.encodedBase64String(file).getBytes());
+            customerDocumentsDTO.setDocumentSize(file.getSize());
+            customerDocumentsDTO.setDocumentExtension(documentName.split(Constants.DOCUMENT_NAME_SEPARATOR)[1].toLowerCase());
+
+            CustomerDocuments customerDocuments = CustomerDocumentsMapper.INSTANCE.mapToCustomerDocuments(customerDocumentsDTO);
+            customerDocumentsRepository.save(customerDocuments);
+            log.info("Document uploaded successfully...!!!");
+
+        } catch (Exception ex){
+            log.error("Exception occurred while customer document upload with message ={}", ex.getMessage());
+            throw new ApplicationException("Exception occurred while customer document upload", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    @Transactional
+    public List<CustomerDocumentsDTO> retrieveCustomerDocumentsByCustId(Long customerId) {
+        List<CustomerDocumentsDTO> customerDocumentsDTOList = new ArrayList<>();
+        try{
+            log.info("Retrieve customer document for a customerId ={}", customerId);
+            List<CustomerDocuments> customerDocumentsList = customerDocumentsRepository.findByCustomerId(customerId);
+            if(!CollectionUtils.isEmpty(customerDocumentsList)) {
+                customerDocumentsDTOList = CustomerDocumentsMapper.INSTANCE.mapToCustomerDocumentsDTO(customerDocumentsList);
+             log.info("Retrieved customer documents successfully !!!");
+            }
+        } catch (Exception ex){
+            log.error("Exception occurred while retrieving customer documents with message ={}", ex.getMessage());
+            throw new ApplicationException("Exception occurred while retrieving customer documents", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return customerDocumentsDTOList;
+    }
+
+    @Override
+    @Transactional
+    public List<CustomerDocumentsDTO> retrieveCustDocumentsByCompanyIdAndType(Long companyId, String documentType) {
+        List<CustomerDocumentsDTO> customerDocumentsDTOList = new ArrayList<>();
+        try{
+            log.info("Retrieve customer document for a companyId ={} and docType = {}", companyId, documentType);
+            List<CustomerDocuments> customerDocumentsList = customerDocumentsRepository.findByCompanyIdAndDocumentType(companyId, documentType);
+            if(!CollectionUtils.isEmpty(customerDocumentsList)) {
+                customerDocumentsDTOList = CustomerDocumentsMapper.INSTANCE.mapToCustomerDocumentsDTO(customerDocumentsList);
+                log.info("Retrieved customer documents successfully !!!");
+            }
+        } catch (Exception ex){
+            log.error("Exception occurred while retrieving customer documents with message ={}", ex.getMessage());
+            throw new ApplicationException("Exception occurred while retrieving customer documents", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return customerDocumentsDTOList;
     }
 
 

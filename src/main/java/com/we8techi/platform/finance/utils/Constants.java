@@ -7,4 +7,5 @@ import lombok.NoArgsConstructor;
 public class Constants {
 
     public static final String SERVER_ERROR = "Something went wrong.";
+    public static final String DOCUMENT_NAME_SEPARATOR = "\\.";
 }

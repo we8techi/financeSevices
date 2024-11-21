@@ -19,11 +19,20 @@ import java.util.Date;
 public class CustomerDTO {
     private Long id;
     private Long companyId;
+    private String occupation;
+    private String customerType;
+    private String mobileNumber;
+    private String area;
+    private Integer score;
     private String name;
-    private int age;
+    private Integer age;
     private String panDetails;
     private String adharDetails;
     private String addressProof;
+    private String city;
+    private String district;
+    private String state;
+    private String pincode;
     private Boolean active;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date created;
